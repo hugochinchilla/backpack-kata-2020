@@ -41,4 +41,13 @@ class CarrierTest extends TestCase
 
         $this->assertEquals(4, count($durance->bags()));
     }
+
+    /** @test */
+    public function a_carrier_can_pick_things_from_the_ground_and_put_them_in_the_backpack(): void
+    {
+        $durance = new Carrier();
+        $durance->pickItem('axe');
+
+        $this->assertEquals(['axe'], $durance->backpack()->items());
+    }
 }

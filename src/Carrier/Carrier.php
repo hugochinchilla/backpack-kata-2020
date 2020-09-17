@@ -32,4 +32,9 @@ class Carrier
     {
         $this->bags[] = $bag;
     }
+
+    public function pickItem(string $item)
+    {
+        $this->backpack->add($item);
+    }
 }
