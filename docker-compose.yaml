@@ -1,0 +1,11 @@
+version: "2.2"
+services:
+    php:
+        build: .
+        image: local/php-starter
+        working_dir: /code
+        environment:
+            HOME: /code
+        volumes:
+            - ".:/code:cached"
+        user: $DOCKER_COMPOSE_USER

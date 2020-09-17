@@ -1,0 +1,35 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=7.4.0"
+    },
+    "require-dev": {
+        "ekino/phpstan-banned-code": "^0.3.1",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "korbeil/phpstan-generic-rules": "^0.2.4",
+        "phpstan/phpstan": "^0.12.18",
+        "phpstan/phpstan-deprecation-rules": "^0.12.2",
+        "phpstan/phpstan-phpunit": "^0.12.7",
+        "phpunit/phpunit": "^9"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Example\\App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Example\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}

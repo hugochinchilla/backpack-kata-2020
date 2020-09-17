@@ -1,0 +1,25 @@
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/ekino/phpstan-banned-code/extension.neon
+    - vendor/korbeil/phpstan-generic-rules/extension.neon
+
+parameters:
+    tmpDir: var/cache/phpstan
+    customRulesetUsed: true
+    reportMagicMethods: true
+    reportMagicProperties: true
+    inferPrivatePropertyTypeFromConstructor: true
+    autoload_directories: []
+    excludes_analyse:
+        - %currentWorkingDirectory%/var
+    universalObjectCratesClasses:
+        - PHPUnit\Framework\TestCase
+    polluteCatchScopeWithTryAssignments: true
+    reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        -
+            message: '#Unreachable statement - code above always terminates.#'
+            path: tests/*
