@@ -32,7 +32,7 @@ class BackpackTest extends TestCase
     {
         $backpack = new Backpack();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $backpack->add("item $i");
         }
 
