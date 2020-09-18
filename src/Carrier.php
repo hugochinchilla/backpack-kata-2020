@@ -48,4 +48,9 @@ class Carrier
             }
         }
     }
+
+    public function setBackpack(Backpack $backpack): void
+    {
+        $this->backpack = $backpack;
+    }
 }

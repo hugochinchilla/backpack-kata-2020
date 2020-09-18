@@ -6,5 +6,4 @@ namespace Example\App;
 
 class ContainerFullException extends \Exception
 {
-
 }

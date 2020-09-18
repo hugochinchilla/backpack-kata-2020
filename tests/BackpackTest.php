@@ -32,17 +32,17 @@ class BackpackTest extends TestCase
     public function a_backpack_can_hold_up_to_8_items(): void
     {
         $backpack = new Backpack();
-        $backpack->add("item 1");
-        $backpack->add("item 2");
-        $backpack->add("item 3");
-        $backpack->add("item 4");
-        $backpack->add("item 5");
-        $backpack->add("item 6");
-        $backpack->add("item 7");
-        $backpack->add("item 8");
+        $backpack->add('item 1');
+        $backpack->add('item 2');
+        $backpack->add('item 3');
+        $backpack->add('item 4');
+        $backpack->add('item 5');
+        $backpack->add('item 6');
+        $backpack->add('item 7');
+        $backpack->add('item 8');
 
         $this->expectException(ContainerFullException::class);
 
-        $backpack->add("item 9");
+        $backpack->add('item 9');
     }
 }

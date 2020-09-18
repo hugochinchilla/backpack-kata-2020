@@ -39,7 +39,7 @@ class CarrierTest extends TestCase
         $durance->addBag(new Bag());
         $durance->addBag(new Bag());
 
-        $this->assertEquals(4, count($durance->bags()));
+        $this->assertCount(4, $durance->bags());
     }
 
     /** @test */
@@ -54,18 +54,12 @@ class CarrierTest extends TestCase
     /** @test */
     public function when_the_backpack_is_full_items_are_stored_in_the_next_empty_bag(): void
     {
+        $factory = new ContainerFactory();
         $a_bag = new Bag();
         $durance = new Carrier();
+        $durance->setBackpack($factory->fullBackpack());
         $durance->addBag($a_bag);
 
-        $durance->pickItem('item 1');
-        $durance->pickItem('item 2');
-        $durance->pickItem('item 3');
-        $durance->pickItem('item 4');
-        $durance->pickItem('item 5');
-        $durance->pickItem('item 6');
-        $durance->pickItem('item 7');
-        $durance->pickItem('item 8');
         $durance->pickItem('this goes to a bag');
 
         $this->assertEquals(['this goes to a bag'], $a_bag->items());
@@ -74,19 +68,12 @@ class CarrierTest extends TestCase
     /** @test */
     public function when_a_bag_is_full_uses_the_next_one_with_capacity(): void
     {
-        $full_bag = new Bag(null, ['item 1', 'item 2', 'item 3', 'item 4']);
+        $factory = new ContainerFactory();
         $empty_bag = new Bag();
         $durance = new Carrier();
-        $durance->addBag($full_bag);
+        $durance->setBackpack($factory->fullBackpack());
+        $durance->addBag($factory->fullBag());
         $durance->addBag($empty_bag);
-        $durance->pickItem('item 1');
-        $durance->pickItem('item 2');
-        $durance->pickItem('item 3');
-        $durance->pickItem('item 4');
-        $durance->pickItem('item 5');
-        $durance->pickItem('item 6');
-        $durance->pickItem('item 7');
-        $durance->pickItem('item 8');
 
         $durance->pickItem('heavy item');
 
