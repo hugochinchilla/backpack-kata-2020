@@ -44,9 +44,13 @@ class Carrier
         foreach ($this->bags as $bag) {
             try {
                 $bag->add($item);
+
+                return;
             } catch (ContainerFullException $e) {
             }
         }
+
+        throw new AllContainersFullException("You can't pick more items");
     }
 
     public function setBackpack(Backpack $backpack): void

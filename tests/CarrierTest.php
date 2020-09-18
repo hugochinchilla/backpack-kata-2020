@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Example\Tests;
 
+use Example\App\AllContainersFullException;
 use Example\App\Bag;
 use Example\App\Carrier;
 use PHPStan\Testing\TestCase;
@@ -78,5 +79,18 @@ class CarrierTest extends TestCase
         $durance->pickItem('heavy item');
 
         $this->assertEquals(['heavy item'], $empty_bag->items());
+    }
+
+    /** @test */
+    public function can_not_pick_an_item_if_the_backpack_and_all_bags_are_full(): void
+    {
+        $factory = new ContainerFactory();
+        $durance = new Carrier();
+        $durance->setBackpack($factory->fullBackpack());
+        $durance->addBag($factory->fullBag());
+
+        $this->expectException(AllContainersFullException::class);
+
+        $durance->pickItem('heavy item');
     }
 }
