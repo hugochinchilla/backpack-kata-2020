@@ -15,9 +15,11 @@ abstract class Container
 
     public function add(string $string): void
     {
-        if (count($this->items) < $this->capacity()) {
-            $this->items[] = $string;
+        if (count($this->items) >= $this->capacity()) {
+            throw new ContainerFullException("This container is full");
         }
+
+        $this->items[] = $string;
     }
 
     public function items(): array

@@ -6,6 +6,7 @@ namespace Example\App\Carrier;
 
 use Example\App\Backpack;
 use Example\App\Bag;
+use Example\App\ContainerFullException;
 
 class Carrier
 {
@@ -35,6 +36,12 @@ class Carrier
 
     public function pickItem(string $item)
     {
-        $this->backpack->add($item);
+        try {
+            $this->backpack->add($item);
+        } catch (ContainerFullException $e) {
+            if ($this->bags()) {
+                $this->bags[0]->add($item);
+            }
+        }
     }
 }

@@ -50,4 +50,24 @@ class CarrierTest extends TestCase
 
         $this->assertEquals(['axe'], $durance->backpack()->items());
     }
+
+    /** @test */
+    public function when_the_backpack_is_full_items_are_stored_in_the_next_empty_bag(): void
+    {
+        $a_bag = new Bag();
+        $durance = new Carrier();
+        $durance->addBag($a_bag);
+
+        $durance->pickItem('item 1');
+        $durance->pickItem('item 2');
+        $durance->pickItem('item 3');
+        $durance->pickItem('item 4');
+        $durance->pickItem('item 5');
+        $durance->pickItem('item 6');
+        $durance->pickItem('item 7');
+        $durance->pickItem('item 8');
+        $durance->pickItem('this goes to a bag');
+
+        $this->assertEquals(['this goes to a bag'], $a_bag->items());
+    }
 }

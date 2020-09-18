@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Example\Tests;
 
 use Example\App\Backpack;
+use Example\App\ContainerFullException;
 use PHPUnit\Framework\TestCase;
 
 class BackpackTest extends TestCase
@@ -31,23 +32,17 @@ class BackpackTest extends TestCase
     public function a_backpack_can_hold_up_to_8_items(): void
     {
         $backpack = new Backpack();
+        $backpack->add("item 1");
+        $backpack->add("item 2");
+        $backpack->add("item 3");
+        $backpack->add("item 4");
+        $backpack->add("item 5");
+        $backpack->add("item 6");
+        $backpack->add("item 7");
+        $backpack->add("item 8");
 
-        for ($i = 0; $i < 10; ++$i) {
-            $backpack->add("item $i");
-        }
+        $this->expectException(ContainerFullException::class);
 
-        $this->assertEquals(
-            [
-                'item 0',
-                'item 1',
-                'item 2',
-                'item 3',
-                'item 4',
-                'item 5',
-                'item 6',
-                'item 7',
-            ],
-            $backpack->items()
-        );
+        $backpack->add("item 9");
     }
 }

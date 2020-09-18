@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Example\Tests;
 
 use Example\App\Bag;
+use Example\App\ContainerFullException;
 use PHPStan\Testing\TestCase;
 
 class BagTest extends TestCase
@@ -39,19 +40,13 @@ class BagTest extends TestCase
     public function a_bag_can_hold_up_to_4_items(): void
     {
         $bag = new Bag();
+        $bag->add("item 1");
+        $bag->add("item 2");
+        $bag->add("item 3");
+        $bag->add("item 4");
 
-        for ($i = 0; $i < 10; ++$i) {
-            $bag->add("item $i");
-        }
+        $this->expectException(ContainerFullException::class);
 
-        $this->assertEquals(
-            [
-                'item 0',
-                'item 1',
-                'item 2',
-                'item 3',
-            ],
-            $bag->items()
-        );
+        $bag->add("item 5");
     }
 }
