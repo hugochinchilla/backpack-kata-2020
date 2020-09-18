@@ -16,21 +16,23 @@ class SortingSpell
         $this->items = [];
     }
 
-    public function sort(Carrier $durance): void
+    public function sort(Carrier $carrier): void
+    {
+        $this->dumpAllContents($carrier);
+        $this->sortAllItems();
+        $this->fillBagsWithItemsOfItsCategory($carrier);
+        $this->putRemainingItemsAnywhere($carrier);
+    }
+
+    private function dumpAllContents(Carrier $durance): void
     {
         $this->dumpContainer($durance->backpack());
         foreach ($durance->bags() as $bag) {
             $this->dumpContainer($bag);
         }
-        foreach ($durance->bags() as $bag) {
-            $bag->setItems($this->getItemsForCategory($bag->category(), 4));
-        }
-        while ($item = array_shift($this->items)) {
-            $durance->pickItem($item);
-        }
     }
 
-    public function dumpContainer(Container $container): void
+    private function dumpContainer(Container $container): void
     {
         foreach ($container->items() as $item) {
             $this->items[] = $item;
@@ -38,7 +40,19 @@ class SortingSpell
         }
     }
 
-    public function getItemsForCategory(ItemCategory $category, int $limit): array
+    private function sortAllItems(): void
+    {
+        usort($this->items, fn ($a, $b) => $a->name() <=> $b->name());
+    }
+
+    private function fillBagsWithItemsOfItsCategory(Carrier $carrier): void
+    {
+        foreach ($carrier->bags() as $bag) {
+            $bag->setItems($this->getItemsForCategory($bag->category(), 4));
+        }
+    }
+
+    private function getItemsForCategory(ItemCategory $category, int $limit): array
     {
         $itemsOfCategory = [];
         $otherItems = [];
@@ -54,5 +68,12 @@ class SortingSpell
         $this->items = $otherItems;
 
         return $itemsOfCategory;
+    }
+
+    private function putRemainingItemsAnywhere(Carrier $carrier): void
+    {
+        while ($item = array_shift($this->items)) {
+            $carrier->pickItem($item);
+        }
     }
 }

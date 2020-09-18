@@ -54,4 +54,25 @@ class SortingSpellTest extends TestCase
         $this->assertEmpty($herbsBag->items());
         $this->assertEquals([$iron], $durance->backpack()->items());
     }
+
+    /** @test */
+    public function moved_objects_are_sorted_alphabetically(): void
+    {
+        $gold = $this->items->gold();
+        $copper = $this->items->copper();
+        $wool = $this->items->wool();
+        $axe = $this->items->axe();
+        $metalBag = new Bag(ItemCategory::METALS());
+        $durance = new Carrier();
+        $durance->addBag($metalBag);
+        $durance->pickItem($gold);
+        $durance->pickItem($copper);
+        $durance->pickItem($wool);
+        $durance->pickItem($axe);
+
+        $this->spell->sort($durance);
+
+        $this->assertEquals([$copper, $gold], $metalBag->items());
+        $this->assertEquals([$axe, $wool], $durance->backpack()->items());
+    }
 }
