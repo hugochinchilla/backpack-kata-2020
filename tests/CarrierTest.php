@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Example\Tests;
 
 use Example\App\Bag;
-use Example\App\Carrier\Carrier;
+use Example\App\Carrier;
 use PHPStan\Testing\TestCase;
 
 class CarrierTest extends TestCase
