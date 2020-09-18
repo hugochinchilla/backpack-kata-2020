@@ -57,6 +57,7 @@ class BagTest extends TestCase
 
         $metalBag->add($herb);
 
+        $this->assertInstanceOf(ItemCategory::class, $metalBag->category());
         $this->assertFalse($herb->category()->equals($metalBag->category()));
     }
 }
