@@ -11,6 +11,15 @@ use PHPStan\Testing\TestCase;
 
 class CarrierTest extends TestCase
 {
+    private ContainerFactory $container;
+    private ItemFactory $items;
+
+    public function setUp(): void
+    {
+        $this->container = new ContainerFactory();
+        $this->items = new ItemFactory();
+    }
+
     /** @test */
     public function a_carrier_starts_with_an_empty_backpack(): void
     {
@@ -46,10 +55,11 @@ class CarrierTest extends TestCase
     /** @test */
     public function a_carrier_can_pick_things_from_the_ground_and_put_them_in_the_backpack(): void
     {
+        $anAxe = $this->items->axe();
         $durance = new Carrier();
-        $durance->pickItem('axe');
+        $durance->pickItem($anAxe);
 
-        $this->assertEquals(['axe'], $durance->backpack()->items());
+        $this->assertEquals([$anAxe], $durance->backpack()->items());
     }
 
     /** @test */
@@ -60,10 +70,11 @@ class CarrierTest extends TestCase
         $durance = new Carrier();
         $durance->setBackpack($factory->fullBackpack());
         $durance->addBag($a_bag);
+        $aMace = $this->items->mace();
 
-        $durance->pickItem('this goes to a bag');
+        $durance->pickItem($aMace);
 
-        $this->assertEquals(['this goes to a bag'], $a_bag->items());
+        $this->assertEquals([$aMace], $a_bag->items());
     }
 
     /** @test */
@@ -72,13 +83,14 @@ class CarrierTest extends TestCase
         $factory = new ContainerFactory();
         $empty_bag = new Bag();
         $durance = new Carrier();
+        $iron = $this->items->iron();
         $durance->setBackpack($factory->fullBackpack());
         $durance->addBag($factory->fullBag());
         $durance->addBag($empty_bag);
 
-        $durance->pickItem('heavy item');
+        $durance->pickItem($iron);
 
-        $this->assertEquals(['heavy item'], $empty_bag->items());
+        $this->assertEquals([$iron], $empty_bag->items());
     }
 
     /** @test */
@@ -91,6 +103,6 @@ class CarrierTest extends TestCase
 
         $this->expectException(AllContainersFullException::class);
 
-        $durance->pickItem('heavy item');
+        $durance->pickItem($this->items->iron());
     }
 }

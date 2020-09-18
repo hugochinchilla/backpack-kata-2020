@@ -9,17 +9,24 @@ use Example\App\Bag;
 
 class ContainerFactory
 {
+    private ItemFactory $items;
+
+    public function __construct()
+    {
+        $this->items = new ItemFactory();
+    }
+
     public function fullBackpack(): Backpack
     {
         $backpack = new Backpack();
-        $backpack->add('item 1');
-        $backpack->add('item 2');
-        $backpack->add('item 3');
-        $backpack->add('item 4');
-        $backpack->add('item 5');
-        $backpack->add('item 6');
-        $backpack->add('item 7');
-        $backpack->add('item 8');
+        $backpack->add($this->items->gold());
+        $backpack->add($this->items->gold());
+        $backpack->add($this->items->gold());
+        $backpack->add($this->items->gold());
+        $backpack->add($this->items->gold());
+        $backpack->add($this->items->gold());
+        $backpack->add($this->items->gold());
+        $backpack->add($this->items->gold());
 
         return $backpack;
     }
@@ -27,10 +34,10 @@ class ContainerFactory
     public function fullBag(): Bag
     {
         $bag = new Bag(null);
-        $bag->add('item 1');
-        $bag->add('item 2');
-        $bag->add('item 3');
-        $bag->add('item 4');
+        $bag->add($this->items->gold());
+        $bag->add($this->items->gold());
+        $bag->add($this->items->gold());
+        $bag->add($this->items->gold());
 
         return $bag;
     }

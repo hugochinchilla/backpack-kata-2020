@@ -10,6 +10,13 @@ use PHPUnit\Framework\TestCase;
 
 class BackpackTest extends TestCase
 {
+    private ItemFactory $items;
+
+    public function setUp(): void
+    {
+        $this->items = new ItemFactory();
+    }
+
     /** @test */
     public function a_new_backpack_is_empty(): void
     {
@@ -21,28 +28,21 @@ class BackpackTest extends TestCase
     /** @test */
     public function can_add_an_item_to_the_backpack(): void
     {
+        $wool = $this->items->wool();
         $backpack = new Backpack();
 
-        $backpack->add('wool');
+        $backpack->add($wool);
 
-        $this->assertEquals(['wool'], $backpack->items());
+        $this->assertEquals([$wool], $backpack->items());
     }
 
     /** @test */
     public function a_backpack_can_hold_up_to_8_items(): void
     {
-        $backpack = new Backpack();
-        $backpack->add('item 1');
-        $backpack->add('item 2');
-        $backpack->add('item 3');
-        $backpack->add('item 4');
-        $backpack->add('item 5');
-        $backpack->add('item 6');
-        $backpack->add('item 7');
-        $backpack->add('item 8');
+        $backpack = (new ContainerFactory())->fullBackpack();
 
         $this->expectException(ContainerFullException::class);
 
-        $backpack->add('item 9');
+        $backpack->add($this->items->gold());
     }
 }

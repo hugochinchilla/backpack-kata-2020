@@ -30,7 +30,7 @@ class Carrier
         $this->bags[] = $bag;
     }
 
-    public function pickItem(string $item): void
+    public function pickItem(Item $item): void
     {
         try {
             $this->backpack->add($item);
@@ -39,7 +39,7 @@ class Carrier
         }
     }
 
-    private function storeInNextAvailableBag(string $item): void
+    private function storeInNextAvailableBag(Item $item): void
     {
         foreach ($this->bags as $bag) {
             try {

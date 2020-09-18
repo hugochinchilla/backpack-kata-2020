@@ -32,23 +32,20 @@ class BagTest extends TestCase
     public function can_add_an_item_to_the_bag(): void
     {
         $bag = new Bag();
+        $wool = (new ItemFactory())->wool();
 
-        $bag->add('wool');
+        $bag->add($wool);
 
-        $this->assertEquals(['wool'], $bag->items());
+        $this->assertEquals([$wool], $bag->items());
     }
 
     /** @test */
     public function a_bag_can_hold_up_to_4_items(): void
     {
-        $bag = new Bag();
-        $bag->add('item 1');
-        $bag->add('item 2');
-        $bag->add('item 3');
-        $bag->add('item 4');
+        $fullBag = (new ContainerFactory())->fullBag();
 
         $this->expectException(ContainerFullException::class);
 
-        $bag->add('item 5');
+        $fullBag->add((new ItemFactory())->cherryBlossom());
     }
 }
