@@ -25,6 +25,9 @@ class SortingSpell
         foreach ($durance->bags() as $bag) {
             $bag->setItems($this->getItemsForCategory($bag->category(), 4));
         }
+        while ($item = array_shift($this->items)) {
+            $durance->pickItem($item);
+        }
     }
 
     public function dumpContainer(Container $container): void

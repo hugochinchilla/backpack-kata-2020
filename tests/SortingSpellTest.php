@@ -39,4 +39,19 @@ class SortingSpellTest extends TestCase
         $this->assertEmpty($herbsBag->items());
         $this->assertEquals([$iron], $metalBag->items());
     }
+
+    /** @test */
+    public function items_that_not_belong_to_a_bag_are_kept_in_the_backpack(): void
+    {
+        $herbsBag = new Bag(ItemCategory::HERBS());
+        $iron = $this->items->iron();
+        $durance = new Carrier();
+        $durance->addBag($herbsBag);
+        $durance->pickItem($iron);
+
+        $this->spell->sort($durance);
+
+        $this->assertEmpty($herbsBag->items());
+        $this->assertEquals([$iron], $durance->backpack()->items());
+    }
 }
