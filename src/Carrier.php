@@ -30,13 +30,21 @@ class Carrier
         $this->bags[] = $bag;
     }
 
-    public function pickItem(string $item)
+    public function pickItem(string $item): void
     {
         try {
             $this->backpack->add($item);
         } catch (ContainerFullException $e) {
-            if ($this->bags()) {
-                $this->bags[0]->add($item);
+            $this->storeInNextAvailableBag($item);
+        }
+    }
+
+    private function storeInNextAvailableBag(string $item): void
+    {
+        foreach ($this->bags as $bag) {
+            try {
+                $bag->add($item);
+            } catch (ContainerFullException $e) {
             }
         }
     }

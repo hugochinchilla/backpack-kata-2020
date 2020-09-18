@@ -8,9 +8,9 @@ class Bag extends Container
 {
     private ?string $category;
 
-    public function __construct(string $category = null)
+    public function __construct(string $category = null, array $items = [])
     {
-        parent::__construct();
+        parent::__construct($items);
         $this->category = $category;
     }
 

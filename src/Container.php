@@ -8,9 +8,9 @@ abstract class Container
 {
     private array $items;
 
-    public function __construct()
+    public function __construct(array $items = [])
     {
-        $this->items = [];
+        $this->items = $items;
     }
 
     public function add(string $string): void
