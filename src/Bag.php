@@ -6,15 +6,15 @@ namespace Example\App;
 
 class Bag extends Container
 {
-    private ?string $category;
+    private ?ItemCategory $category;
 
-    public function __construct(string $category = null)
+    public function __construct(ItemCategory $category = null)
     {
         parent::__construct();
         $this->category = $category;
     }
 
-    public function category(): ?string
+    public function category(): ?ItemCategory
     {
         return $this->category;
     }

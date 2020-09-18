@@ -6,6 +6,7 @@ namespace Example\Tests;
 
 use Example\App\Bag;
 use Example\App\ContainerFullException;
+use Example\App\ItemCategory;
 use PHPStan\Testing\TestCase;
 
 class BagTest extends TestCase
@@ -21,9 +22,10 @@ class BagTest extends TestCase
     /** @test */
     public function a_bag_can_have_a_category(): void
     {
-        $bag = new Bag('a category');
+        $bag = new Bag(ItemCategory::HERBS());
 
-        $this->assertEquals('a category', $bag->category());
+        $this->assertInstanceOf(ItemCategory::class, $bag->category());
+        $this->assertTrue($bag->category()->equals(ItemCategory::HERBS()));
     }
 
     /** @test */
