@@ -31,5 +31,10 @@ abstract class Container
         return $this->items;
     }
 
+    public function setItems(array $items): void
+    {
+        $this->items = $items;
+    }
+
     abstract protected function capacity(): int;
 }
