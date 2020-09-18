@@ -48,4 +48,15 @@ class BagTest extends TestCase
 
         $fullBag->add((new ItemFactory())->cherryBlossom());
     }
+
+    /** @test */
+    public function a_bag_with_category_can_hold_items_of_any_kind(): void
+    {
+        $metalBag = new Bag(ItemCategory::METALS());
+        $herb = (new ItemFactory())->cherryBlossom();
+
+        $metalBag->add($herb);
+
+        $this->assertFalse($herb->category()->equals($metalBag->category()));
+    }
 }
