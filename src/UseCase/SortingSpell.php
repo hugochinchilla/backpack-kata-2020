@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Example\App\UseCase;
 
-use Example\App\Domain\Carrier;
 use Example\App\Domain\Container;
 use Example\App\Domain\Item;
 use Example\App\Domain\ItemCategory;
+use Example\App\Domain\Player;
 
 class SortingSpell
 {
@@ -21,15 +21,15 @@ class SortingSpell
         $this->items = [];
     }
 
-    public function sort(Carrier $carrier): void
+    public function sort(Player $player): void
     {
-        $this->dumpAllContents($carrier);
+        $this->dumpAllContents($player);
         $this->sortAllItems();
-        $this->fillBagsWithItemsOfItsCategory($carrier);
-        $this->putRemainingItemsAnywhere($carrier);
+        $this->fillBagsWithItemsOfItsCategory($player);
+        $this->putRemainingItemsAnywhere($player);
     }
 
-    private function dumpAllContents(Carrier $durance): void
+    private function dumpAllContents(Player $durance): void
     {
         $this->dumpContainer($durance->backpack());
         foreach ($durance->bags() as $bag) {
@@ -50,9 +50,9 @@ class SortingSpell
         usort($this->items, fn ($a, $b) => $a->name() <=> $b->name());
     }
 
-    private function fillBagsWithItemsOfItsCategory(Carrier $carrier): void
+    private function fillBagsWithItemsOfItsCategory(Player $player): void
     {
-        foreach ($carrier->bags() as $bag) {
+        foreach ($player->bags() as $bag) {
             $bag->setItems($this->getItemsForCategory($bag->category(), 4));
         }
     }
@@ -75,10 +75,10 @@ class SortingSpell
         return $itemsOfCategory;
     }
 
-    private function putRemainingItemsAnywhere(Carrier $carrier): void
+    private function putRemainingItemsAnywhere(Player $player): void
     {
         while ($item = array_shift($this->items)) {
-            $carrier->pickItem($item);
+            $player->pickItem($item);
         }
     }
 }

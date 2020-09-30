@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace Example\Tests\UseCase;
 
 use Example\App\Domain\Bag;
-use Example\App\Domain\Carrier;
 use Example\App\Domain\ItemCategory;
+use Example\App\Domain\Player;
 use Example\App\UseCase\SortingSpell;
 use Example\Tests\Utils\ItemFactory;
 use PHPStan\Testing\TestCase;
@@ -29,7 +29,7 @@ class SortingSpellTest extends TestCase
         $herbsBag = new Bag(ItemCategory::HERBS());
         $metalBag = new Bag(ItemCategory::METALS());
         $iron = $this->items->iron();
-        $durance = new Carrier();
+        $durance = new Player();
         $durance->addBag($herbsBag);
         $durance->addBag($metalBag);
         $durance->pickItem($iron);
@@ -46,7 +46,7 @@ class SortingSpellTest extends TestCase
     {
         $herbsBag = new Bag(ItemCategory::HERBS());
         $iron = $this->items->iron();
-        $durance = new Carrier();
+        $durance = new Player();
         $durance->addBag($herbsBag);
         $durance->pickItem($iron);
 
@@ -64,7 +64,7 @@ class SortingSpellTest extends TestCase
         $wool = $this->items->wool();
         $axe = $this->items->axe();
         $metalBag = new Bag(ItemCategory::METALS());
-        $durance = new Carrier();
+        $durance = new Player();
         $durance->addBag($metalBag);
         $durance->pickItem($gold);
         $durance->pickItem($copper);

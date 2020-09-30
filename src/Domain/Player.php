@@ -8,7 +8,7 @@ use Example\App\Domain\Exception\AllContainersFullException;
 use Example\App\Domain\Exception\ContainerFullException;
 use Example\App\Domain\Exception\MaxBagsReachedException;
 
-class Carrier
+class Player
 {
     private const MAX_BAGS = 4;
 

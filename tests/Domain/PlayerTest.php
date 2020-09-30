@@ -5,14 +5,14 @@ declare(strict_types = 1);
 namespace Example\Tests\Domain;
 
 use Example\App\Domain\Bag;
-use Example\App\Domain\Carrier;
 use Example\App\Domain\Exception\AllContainersFullException;
 use Example\App\Domain\Exception\MaxBagsReachedException;
+use Example\App\Domain\Player;
 use Example\Tests\Utils\ContainerFactory;
 use Example\Tests\Utils\ItemFactory;
 use PHPStan\Testing\TestCase;
 
-class CarrierTest extends TestCase
+class PlayerTest extends TestCase
 {
     private ContainerFactory $container;
     private ItemFactory $items;
@@ -24,17 +24,17 @@ class CarrierTest extends TestCase
     }
 
     /** @test */
-    public function a_carrier_starts_with_an_empty_backpack(): void
+    public function durance_starts_with_an_empty_backpack(): void
     {
-        $durance = new Carrier();
+        $durance = new Player();
 
         $this->assertEmpty($durance->backpack()->items());
     }
 
     /** @test */
-    public function a_carrier_can_have_a_bag(): void
+    public function durance_can_have_a_bag(): void
     {
-        $durance = new Carrier();
+        $durance = new Player();
         $a_bag = new Bag();
 
         $durance->addBag($a_bag);
@@ -43,11 +43,11 @@ class CarrierTest extends TestCase
     }
 
     /** @test */
-    public function a_carrier_can_have_up_to_4_bags(): void
+    public function durance_can_have_up_to_4_bags(): void
     {
         $this->expectException(MaxBagsReachedException::class);
 
-        $durance = new Carrier();
+        $durance = new Player();
 
         $durance->addBag(new Bag());
         $durance->addBag(new Bag());
@@ -57,10 +57,10 @@ class CarrierTest extends TestCase
     }
 
     /** @test */
-    public function a_carrier_can_pick_things_from_the_ground_and_put_them_in_the_backpack(): void
+    public function durance_can_pick_things_from_the_ground_and_put_them_in_the_backpack(): void
     {
         $anAxe = $this->items->axe();
-        $durance = new Carrier();
+        $durance = new Player();
         $durance->pickItem($anAxe);
 
         $this->assertEquals([$anAxe], $durance->backpack()->items());
@@ -71,7 +71,7 @@ class CarrierTest extends TestCase
     {
         $factory = new ContainerFactory();
         $a_bag = new Bag();
-        $durance = new Carrier();
+        $durance = new Player();
         $durance->setBackpack($factory->fullBackpack());
         $durance->addBag($a_bag);
         $aMace = $this->items->mace();
@@ -86,7 +86,7 @@ class CarrierTest extends TestCase
     {
         $factory = new ContainerFactory();
         $empty_bag = new Bag();
-        $durance = new Carrier();
+        $durance = new Player();
         $iron = $this->items->iron();
         $durance->setBackpack($factory->fullBackpack());
         $durance->addBag($factory->fullBag());
@@ -101,7 +101,7 @@ class CarrierTest extends TestCase
     public function can_not_pick_an_item_if_the_backpack_and_all_bags_are_full(): void
     {
         $factory = new ContainerFactory();
-        $durance = new Carrier();
+        $durance = new Player();
         $durance->setBackpack($factory->fullBackpack());
         $durance->addBag($factory->fullBag());
 
