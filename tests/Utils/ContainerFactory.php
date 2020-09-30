@@ -6,7 +6,6 @@ namespace Example\Tests\Utils;
 
 use Example\App\Domain\Backpack;
 use Example\App\Domain\Bag;
-use Example\Tests\Utils\ItemFactory;
 
 class ContainerFactory
 {

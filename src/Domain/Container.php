@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Example\App\Domain;
 
 use Example\App\Domain\Exception\ContainerFullException;
-use Example\App\Domain\Item;
 
 abstract class Container
 {

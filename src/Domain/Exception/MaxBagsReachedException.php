@@ -6,5 +6,4 @@ namespace Example\App\Domain\Exception;
 
 class MaxBagsReachedException extends \Exception
 {
-
 }

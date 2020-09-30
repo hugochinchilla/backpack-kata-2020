@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Example\Tests\Domain;
 
-use Example\App\Domain\Exception\AllContainersFullException;
 use Example\App\Domain\Bag;
 use Example\App\Domain\Carrier;
+use Example\App\Domain\Exception\AllContainersFullException;
 use Example\App\Domain\Exception\MaxBagsReachedException;
 use Example\Tests\Utils\ContainerFactory;
 use Example\Tests\Utils\ItemFactory;
