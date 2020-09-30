@@ -2,12 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests;
+namespace Example\Tests\UseCase;
 
-use Example\App\Bag;
-use Example\App\Carrier;
-use Example\App\ItemCategory;
-use Example\App\SortingSpell;
+use Example\App\Domain\Bag;
+use Example\App\Domain\Carrier;
+use Example\App\Domain\ItemCategory;
+use Example\App\UseCase\SortingSpell;
+use Example\Tests\Utils\ItemFactory;
 use PHPStan\Testing\TestCase;
 
 class SortingSpellTest extends TestCase

@@ -2,10 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests;
+namespace Example\Tests\Domain;
 
-use Example\App\Backpack;
-use Example\App\ContainerFullException;
+use Example\App\Domain\Backpack;
+use Example\App\Domain\Exception\ContainerFullException;
+use Example\Tests\Utils\ContainerFactory;
+use Example\Tests\Utils\ItemFactory;
 use PHPUnit\Framework\TestCase;
 
 class BackpackTest extends TestCase

@@ -2,7 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Example\App;
+namespace Example\App\Domain;
+
+use Example\App\Domain\Container;
+use Example\App\Domain\ItemCategory;
 
 class Bag extends Container
 {

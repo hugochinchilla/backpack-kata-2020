@@ -2,7 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Example\App;
+namespace Example\App\UseCase;
+
+use Example\App\Domain\Carrier;
+use Example\App\Domain\Container;
+use Example\App\Domain\Item;
+use Example\App\Domain\ItemCategory;
 
 class SortingSpell
 {

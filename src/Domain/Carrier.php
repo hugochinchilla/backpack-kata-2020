@@ -2,7 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Example\App;
+namespace Example\App\Domain;
+
+use Example\App\Domain\Exception\AllContainersFullException;
+use Example\App\Domain\Exception\ContainerFullException;
+use Example\App\Domain\Backpack;
+use Example\App\Domain\Bag;
+use Example\App\Domain\Item;
 
 class Carrier
 {

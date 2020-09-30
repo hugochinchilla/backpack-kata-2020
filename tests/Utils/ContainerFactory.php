@@ -2,10 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests;
+namespace Example\Tests\Utils;
 
-use Example\App\Backpack;
-use Example\App\Bag;
+use Example\App\Domain\Backpack;
+use Example\App\Domain\Bag;
+use Example\Tests\Utils\ItemFactory;
 
 class ContainerFactory
 {

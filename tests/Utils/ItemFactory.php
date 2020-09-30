@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Example\Tests;
+namespace Example\Tests\Utils;
 
-use Example\App\Item;
-use Example\App\ItemCategory;
+use Example\App\Domain\Item;
+use Example\App\Domain\ItemCategory;
 
 class ItemFactory
 {
