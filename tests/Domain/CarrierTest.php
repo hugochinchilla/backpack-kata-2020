@@ -7,6 +7,7 @@ namespace Example\Tests\Domain;
 use Example\App\Domain\Exception\AllContainersFullException;
 use Example\App\Domain\Bag;
 use Example\App\Domain\Carrier;
+use Example\App\Domain\Exception\MaxBagsReachedException;
 use Example\Tests\Utils\ContainerFactory;
 use Example\Tests\Utils\ItemFactory;
 use PHPStan\Testing\TestCase;
@@ -41,8 +42,11 @@ class CarrierTest extends TestCase
         $this->assertEquals([$a_bag], $durance->bags());
     }
 
+    /** @test */
     public function a_carrier_can_have_up_to_4_bags(): void
     {
+        $this->expectException(MaxBagsReachedException::class);
+
         $durance = new Carrier();
 
         $durance->addBag(new Bag());
@@ -50,8 +54,6 @@ class CarrierTest extends TestCase
         $durance->addBag(new Bag());
         $durance->addBag(new Bag());
         $durance->addBag(new Bag());
-
-        $this->assertCount(4, $durance->bags());
     }
 
     /** @test */

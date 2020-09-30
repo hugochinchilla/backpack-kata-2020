@@ -8,10 +8,13 @@ use Example\App\Domain\Exception\AllContainersFullException;
 use Example\App\Domain\Exception\ContainerFullException;
 use Example\App\Domain\Backpack;
 use Example\App\Domain\Bag;
+use Example\App\Domain\Exception\MaxBagsReachedException;
 use Example\App\Domain\Item;
 
 class Carrier
 {
+    private const MAX_BAGS = 4;
+
     private Backpack $backpack;
     private array $bags;
 
@@ -33,6 +36,10 @@ class Carrier
 
     public function addBag(Bag $bag): void
     {
+        if (count($this->bags) >= self::MAX_BAGS) {
+            throw new MaxBagsReachedException("You can't have more bags");
+        }
+
         $this->bags[] = $bag;
     }
 
